@@ -1,0 +1,5 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "microSD_4682") (type "KiCad") (uri "${KIPRJMOD}/libraries/microSD_4682.pretty") (options "") (descr ""))
+	(lib (name "Motor_5V_21x23_module") (type "KiCad") (uri "${KIPRJMOD}/libraries/Motor_5V_21x23_module.pretty") (options "") (descr ""))
+)

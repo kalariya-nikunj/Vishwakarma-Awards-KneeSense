@@ -1,5 +1,4 @@
-# Starter dependencies for the planned Python BLE logger and signal plots.
-# No logger is currently included in this checkout.
+# Dependencies imported by software/kneesense_ble_logger.py (Python 3.10+).
 # Record tested versions after verifying the actual acquisition environment.
 bleak
 matplotlib

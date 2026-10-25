@@ -1,6 +1,6 @@
 # Recording data dictionary
 
-Status: provisional schema based on the separate local `kneesense_ble_logger.py` inspected during repository setup. That script is not included in this checkout. Verify every field against the firmware and logger actually used before treating this as the definitive format.
+Status: schema inspected against `software/kneesense_ble_logger.py` and `firmware/Firmware_thigh_shank/Firmware_thigh_shank.ino`. Their field order and scale agree. Verify the firmware actually flashed for each recorded session; physical accuracy, sensor configuration, and alignment have not been established by this source inspection.
 
 One CSV row represents one received BLE notification from one node. Rows from two devices may be interleaved; they are not synchronized pairs.
 
@@ -13,7 +13,7 @@ One CSV row represents one received BLE notification from one node. Rows from tw
 | `gx_dps`, `gy_dps`, `gz_dps` | Decoded angular-velocity components | nominal degrees/second, float | Logger divides packet integers by 100; confirm firmware scale, axes, and calibration |
 | `accel_mag_ms2` | `sqrt(ax_ms2² + ay_ms2² + az_ms2²)` | nominal m/s², float | Derived from decoded acceleration; not knee angle |
 
-The inspected logger expects little-endian `<I6h` packets: one unsigned 32-bit timestamp and six signed 16-bit components, totaling 16 bytes. It rejects other packet lengths. Confirm the transmitted firmware format before using this assumption. Independent node timestamps must not be assumed to share a clock.
+The logger expects little-endian `<I6h` packets: one unsigned 32-bit timestamp and six signed 16-bit components, totaling 16 bytes. It rejects other packet lengths. The firmware uses a packed structure in the same field order, multiplies sensor values by 100, rounds them, and saturates to signed 16-bit limits before transmission; byte order depends on the target board. It uses `millis()` for device timestamps and targets a 20,000-microsecond sample interval (50 Hz), which is not a measured delivered rate. Acceleration includes gravity; gyroscope readings have a stationary startup bias subtracted. Independent node timestamps must not be assumed to share a clock.
 
 ## Complete for the actual recording format
 
