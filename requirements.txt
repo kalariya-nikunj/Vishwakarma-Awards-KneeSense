@@ -1,0 +1,5 @@
+# Starter dependencies for the planned Python BLE logger and signal plots.
+# No logger is currently included in this checkout.
+# Record tested versions after verifying the actual acquisition environment.
+bleak
+matplotlib
